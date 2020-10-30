@@ -1,4 +1,4 @@
-# LongPressIssue
+# Long Press Issue
 Example XF App showing possible issue with LongPress detection
 
 When a press begins, the ripple effect starts it's animation. Once the required time has passed, the command is called for a long press.
