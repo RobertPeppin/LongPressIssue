@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="LongPressExample.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LongPressExample"
+    xmlns:sf="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:syncEffectsView="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <Grid
+        x:Name="MainGrid"
+        ColumnDefinitions="*,4*,*"
+        HorizontalOptions="Fill"
+        RowDefinitions="32, *, Auto, 16"
+        VerticalOptions="Fill">
+        <sf:SfListView
+            Grid.Row="1"
+            Grid.Column="1"
+            AutoFitMode="DynamicHeight"
+            BackgroundColor="WhiteSmoke"
+            ItemsSource="{Binding Items}"
+            QueryItemSize="SfListView_QueryItemSize"
+            SelectionMode="None">
+            <sf:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <syncEffectsView:SfEffectsView
+                        Margin="0,8"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="0,16,16,16"
+                        LongPressEffects="Ripple"
+                        LongPressedCommand="{Binding BindingContext.LongPressCommand, Source={x:Reference MainGrid}}"
+                        LongPressedCommandParameter="{Binding .}"
+                        RippleColor="Red">
+
+                        <syncEffectsView:SfEffectsView.Content>
+                            <StackLayout Padding="8">
+                                <Label Text="{Binding Name}" TextColor="Black" />
+                                <Label Text="{Binding JobTitle}" TextColor="Black" />
+                            </StackLayout>
+                        </syncEffectsView:SfEffectsView.Content>
+                        
+                    </syncEffectsView:SfEffectsView>
+                </DataTemplate>
+            </sf:SfListView.ItemTemplate>
+        </sf:SfListView>
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="16"
+            LineBreakMode="WordWrap"
+            Text="{Binding Message}" />
+    </Grid>
+</ContentPage>
